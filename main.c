@@ -22,7 +22,6 @@ int main(int argc, char ** argv)
 	  
   MALLOC(argv_org, char *, sizeof(char *) * (argc+1), main);
 		
-		
   for (i = 0; i < argc; i++)
     {
       arglen = sizeof(char) * (strlen(argv[i]) + 1);
@@ -79,7 +78,6 @@ int main(int argc, char ** argv)
 	      dup2(fd, 1);
 	      dup2(fd, 2);
 	    }
-		  
 	  setsid();
 	  break;
 
@@ -99,7 +97,6 @@ int main(int argc, char ** argv)
 	}
     }
   ifcount = 0;
-	  
   yyparse();
   ifnode = p_head_ifconf_node;
   while (ifnode != NULL)
@@ -107,7 +104,6 @@ int main(int argc, char ** argv)
       PT_CREATE(NULL, NULL, if_thread, ifnode->if_conf_ptr, main);
       ifnode = ifnode->next_node_ptr;
     }
-	  
   signal(SIGHUP, (void *)&sighup_hndlr);
   signal(SIGQUIT, (void *)&sigquit_hndlr);
   signal(SIGTERM, (void *)&sigquit_hndlr);
@@ -162,7 +158,6 @@ void shutdown_adver(void)
     }
 }
 
-
 void * adver_thread(void *arg)
 {
   vrrp_instance * vrrp_inst = (vrrp_instance *)arg;
@@ -178,9 +173,7 @@ void * adver_thread(void *arg)
 
   if (vrrp_inst->pkt->priority < MAX_VRID)
     vrrp_inst->status = BKUP_STAT;
-
   freshen_timespec(&vrrp_inst->abs_timer);
-
   if (vrrp_inst->pkt->priority < MAX_VRID)
     add_timespec(&vrrp_inst->abs_timer, &vrrp_inst->master_down_interval);
   
@@ -191,7 +184,6 @@ void * adver_thread(void *arg)
   
   while(1)
     {
-      
       err_status = pthread_cond_timedwait(&vrrp_inst->vrrp_cond,
 					  &vrrp_inst->vrrp_mutex,
 					  &vrrp_inst->abs_timer);
