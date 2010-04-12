@@ -1,0 +1,13 @@
+January 28, 2002
+
+At this early stage, "Shadow VRRPd" will only run on Solaris SPARC.
+This should change in the near future. To compile and install the
+program, simply run "make" and then copy the resulting binary to
+wherever you see fit. Note that you may wish to change the default
+path to the configuration file by modifying CONF in vrrpd.h.
+
+Until I can write more detailed documentation, you only have
+the included vrrpd.conf.example file for reference. However,
+feel free to email me if you have any questions. I would 
+appreciate hearing the results of any testing that is done.
+

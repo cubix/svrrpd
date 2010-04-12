@@ -1,0 +1,37 @@
+interface 10.0.1.13 {
+	# simple or none are the only available
+	# authentication options at this point.
+	auth simple "testVRRP"; 
+	vrouter 5 {
+		priority 250; # As per the RFC, priority 100 is default
+		adverinterval 3;
+		preempt false;
+		# always put at least one
+		# ip here until the parser
+		# is enchanced somewhat.
+		iplist {
+			10.0.1.101;
+			10.0.1.102;
+			10.0.1.103;
+		};
+	};
+	
+	vrouter 6 {
+		priority 100;
+		adverinterval 5;
+		iplist {
+			10.0.1.104;
+			10.0.1.105;
+		};
+	};
+};
+
+interface 10.0.10.13 {
+	auth none;
+	vrouter 1 {
+		priority 255; # the parser should enforce this 
+		iplist {
+			10.0.10.13;
+		};
+	};
+};
